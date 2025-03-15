@@ -3,11 +3,24 @@ import requests # リクエストするための機能をインポート
 from datetime import datetime # 現在時刻などの時間を扱う機能をインポート
 import pandas as pd # データフレームを扱う機能をインポート
 
-print("天気アプリ")
-print("東京の天気を表示しています。") 
-print("東京のcitycodeは130010です。") 
+# 選択肢を作成
+city_code_list = {
+    "東京都":"130010",
+    "大阪" : "270000",
+}
+# 選択肢のデフォルトを設定
+city_code_index = "東京都"
 
-url = "https://weather.tsukumijima.net/api/forecast/city/" + "130010" # APIにリクエストするURLを作成　東京のcityコード
+
+st.title("天気アプリ") # タイトル
+st.write("調べたい地域を選んでください。") # サブタイトル
+city_code_index = st.selectbox("地域を選んでください。",city_code_list.keys()) # 選択肢のキーをst.selectboxで選択し、city_code_indexに代入
+city_code = city_code_list[city_code_index] # 選択したキーからAPIのリクエストに使うcityコードに変換し、city_codeに代入
+current_city_code = st.empty() # 選択中の地域を補油時するための箱をcurrent_city_codeとして用意
+current_city_code.write("選択中の地域:" + city_code_index) # 用意した箱に選択肢した地域を代入し、表示させる
+
+url = "https://weather.tsukumijima.net/api/forecast/city/" + city_code # APIにリクエストするURLを作成
+
 
 response = requests.get(url) # 作成したリクエスト用URLでアクセスして、responseに代入
 
@@ -31,7 +44,7 @@ else:
 
 # 現在時刻の降水確率をweather_now_textに代入
 weather_now_text = "現在の降水確率 : " + weather_now
-print(weather_now_text) # 現在時刻の降水確率を表示
+st.write(weather_now_text) # 現在時刻の降水確率を表示
 
 # 今日、明日、明後日の降水確率をDadaFrameに代入
 df1 = pd.DataFrame(weather_json['forecasts'][0]['chanceOfRain'],index=["今日"]) # index名を今日という文字列に設定
@@ -39,4 +52,4 @@ df2 = pd.DataFrame(weather_json['forecasts'][1]['chanceOfRain'],index=["明日"]
 df3 = pd.DataFrame(weather_json['forecasts'][2]['chanceOfRain'],index=["明後日"]) # index名を明後日という文字列に設定
 
 df = pd.concat([df1,df2,df3]) # 今日、明日、明後日の降水確率を結合して一覧にしてdfに代入
-print(df) # 一覧にした降水確率を表示
+st.dataframe(df) # 一覧にした降水確率を表示
