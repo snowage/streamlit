@@ -6,7 +6,7 @@ from openai import OpenAI # openAIのchatGPTのAIを活用するための機能�
 
 import os # OSが持つ環境変数OPENAI_API_KEYにAPIを入力するためにosにアクセスするためのライブラリをインポート
 # ここにご自身のAPIキーを入力してください！
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 
 # openAIの機能をclientに代入
 client = OpenAI()
@@ -37,7 +37,7 @@ content_kind_of =[
 def run_gpt(content_text_to_gpt,content_kind_of_to_gpt,content_maxStr_to_gpt):
     # リクエスト内容を決める
     request_to_gpt = content_text_to_gpt + " また、これを記事として読めるように、記事のタイトル、目次、内容の順番で出力してください。内容は"+ content_maxStr_to_gpt + "文字以内で出力してください。" + "また、文章は" + content_kind_of_to_gpt + "にしてください。"
-    
+
     # 決めた内容を元にclient.chat.completions.createでchatGPTにリクエスト。オプションとしてmodelにAIモデル、messagesに内容を指定
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -54,7 +54,7 @@ st.title('GPTに記事書かせるアプリ')# タイトル
 
 # 書かせたい内容
 content_text_to_gpt = st.sidebar.text_input("書かせたい内容を入力してください！")
-            
+
 # 書かせたい内容のテイストを選択肢として表示する
 content_kind_of_to_gpt = st.sidebar.selectbox("文章の種類",options=content_kind_of)
 
