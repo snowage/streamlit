@@ -16,8 +16,8 @@ set_language_list = {
 }
 
 st.title("文字認識アプリ") # タイトル表示
-set_language = st.selectbox("音声認識する言語を選んでください。",set_language_list.keys()) # 言語選択のためのリスト
-file_upload = st.file_uploader("ここに音声認識したファイルをアップロードしてください。",type=["png","jpg"]) # tesseractが認識できるpngとjpgだけを許可するアップローダーの設置
+set_language = st.selectbox("画像認識させたい言語を選んでください。",set_language_list.keys()) # 言語選択のためのリスト
+file_upload = st.file_uploader("画像をアップロードしてください。",type=["png","jpg"]) # tesseractが認識できるpngとjpgだけを許可するアップローダーの設置
 
 # アップロードされたらfile_uploadがNoneではなくなるので、実行される
 if (file_upload !=None):
