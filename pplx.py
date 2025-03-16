@@ -80,7 +80,8 @@ if st.button("情報を取得"):
         if result.choices:
             for choice in result.choices:
                 st.write(choice.message.content)
-                if choice.message.citations:
+                # citationsが存在するかチェック
+                if hasattr(choice.message, 'citations') and choice.message.citations:
                     st.write("参考文献:")
                     for citation in choice.message.citations:
                         st.write(f"- {citation.citation}")
