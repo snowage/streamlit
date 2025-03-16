@@ -29,6 +29,10 @@ import pandas as pd
 ```
 """
 
+<<<<<<< HEAD
+=======
+#チャートの表示
+>>>>>>> a273491 (first commit)
 st.write('DataFrame') # テキストの表示
 
 df = pd.DataFrame(
@@ -44,16 +48,27 @@ df = pd.DataFrame(
     columns=['lat', 'lon']
 )
 
+<<<<<<< HEAD
 
 st.map(df) # 地図の表示
 
+=======
+st.map(df) # 地図の表示
+
+
+#画像表示
+>>>>>>> a273491 (first commit)
 st.write('Display Image') #画像の表示
 
 img = Image.open('pic/img031.jpg') # 画像の読み込み
 st.image(img, caption='sample', use_container_width=True) # 画像の表示
 
 
+<<<<<<< HEAD
 
+=======
+#ウィジェット
+>>>>>>> a273491 (first commit)
 st.write('Interactive Widgets') # ウィジェットの表示
 
 text = st.sidebar.text_input('あなたの趣味を教えてください。') # テキスト入力
